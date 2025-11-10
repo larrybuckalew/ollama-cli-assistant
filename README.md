@@ -1,245 +1,156 @@
-# Ollama CLI Assistant with MCP Support
+# Ollama CLI Assistant
 
-A powerful command-line interface that integrates Ollama with Model Context Protocol (MCP) for enhanced AI assistance with tool capabilities.
+A comprehensive AI assistant platform with both **Command-Line Interface** and **Web Interface** for interacting with Ollama and MCP (Model Context Protocol).
 
-<<<<<<< HEAD
-## 🌟 Features
+## 🏗️ Project Structure
 
-=======
-🌟 **Features**
->>>>>>> 21b9f07b8f138c2534cb3526fb9816de9d3d4229
-- **Interactive Chat Mode** - Natural conversation with your local LLM
-- **MCP Integration** - Connect to multiple MCP servers for extended capabilities
-- **File Operations** - Read and discuss files with AI assistance
-- **Shell Execution** - Execute commands with AI explanations
-- **Multiple Model Support** - Easy switching between Ollama models
-- **Conversation History** - Save and restore chat sessions
-- **Streaming Responses** - Real-time AI output
-- **System Prompts** - Customize AI behavior
-- **Persistent Configuration** - Settings saved between sessions
+This repository contains two complementary applications:
 
-<<<<<<< HEAD
+```
+ollama-cli-assistant/
+├── ollama-cli.py          # Python CLI Application
+├── requirements.txt       # Python dependencies
+├── package.json           # Next.js Web UI dependencies
+├── *.tsx                  # React/Next.js components
+├── *.css                  # Stylesheets
+├── README.md             # This file
+└── LICENSE               # MIT License
+```
+
+## 🚀 Two Ways to Use Ollama CLI
+
+### 1. Command-Line Interface (Python)
+
+A powerful terminal-based AI assistant with MCP integration.
+
+#### Features:
+- Interactive chat with streaming responses
+- MCP server integration (filesystem, GitHub, databases)
+- File operations and shell command execution
+- Conversation history
+- Multiple model support
+
+#### Quick Start:
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run the CLI
+python ollama-cli.py
+
+# Single query mode
+python ollama-cli.py -q "What is Python?"
+```
+
+### 2. Web Interface (Next.js)
+
+A modern web application for Ollama CLI with a beautiful UI.
+
+#### Features:
+- Modern, responsive web interface
+- Real-time chat interface
+- Settings panel for configuration
+- MCP server management UI
+- Statistics and analytics
+- Marketing pages (pricing, contact)
+
+#### Quick Start:
+```bash
+# Install Node.js dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+npm start
+```
+
+Visit `http://localhost:3000` to use the web interface.
+
 ## 📋 Prerequisites
 
+### For CLI (Python):
 - Python 3.8+
 - [Ollama](https://ollama.ai) installed and running
 - Node.js (for MCP servers)
 
-## 🚀 Installation
+### For Web UI (Next.js):
+- Node.js 18+
+- npm or yarn
 
-### 1. Clone the repository
+## 🔧 Installation
 
+### 1. Clone Repository
 ```bash
 git clone https://github.com/larrybuckalew/ollama-cli-assistant.git
 cd ollama-cli-assistant
 ```
 
-### 2. Install Python dependencies
-
+### 2. Setup Python CLI
 ```bash
+# Install Python dependencies
 pip install -r requirements.txt
-```
 
-### 3. Install MCP servers (optional but recommended)
+# Start Ollama
+ollama serve
 
-```bash
-# Filesystem access
-npm install -g @modelcontextprotocol/server-filesystem
+# Pull a model
+ollama pull llama2
 
-# GitHub integration
-npm install -g @modelcontextprotocol/server-github
-
-# Web search
-npm install -g @modelcontextprotocol/server-brave-search
-
-# PostgreSQL database
-npm install -g @modelcontextprotocol/server-postgres
-```
-
-### 4. Make the script executable (Linux/Mac)
-
-```bash
-chmod +x ollama-cli.py
-```
-
-### 5. Optional: Add to PATH
-
-```bash
-# Add to ~/.bashrc or ~/.zshrc
-echo 'alias ai="python3 /path/to/ollama-cli.py"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-## 🎯 Quick Start
-
-### Basic Usage
-
-=======
-📋 **Prerequisites**
-- Python 3.8+
-- Ollama installed and running
-- Node.js (for MCP servers)
-
-🚀 **Installation**
-1. Clone the repository
-    ```bash
-    git clone https://github.com/yourusername/ollama-cli-assistant.git
-    cd ollama-cli-assistant
-    ```
-2. Install Python dependencies
-    ```bash
-    pip install -r requirements.txt
-    ```
-3. Install MCP servers (optional but recommended)
-    ```bash
-    # Filesystem access
-    npm install -g @modelcontextprotocol/server-filesystem
-
-    # GitHub integration
-    npm install -g @modelcontextprotocol/server-github
-
-    # Web search
-    npm install -g @modelcontextprotocol/server-brave-search
-
-    # PostgreSQL database
-    npm install -g @modelcontextprotocol/server-postgres
-    ```
-4. Make the script executable
-    ```bash
-    chmod +x ollama-cli.py
-    ```
-5. Optional: Add to PATH
-    ```bash
-    # Add to ~/.bashrc or ~/.zshrc
-    echo 'alias ai="python3 /path/to/ollama-cli.py"' >> ~/.bashrc
-    source ~/.bashrc
-    ```
-
-🎯 **Quick Start**
-
-**Basic Usage**
->>>>>>> 21b9f07b8f138c2534cb3526fb9816de9d3d4229
-```bash
-# Interactive mode
+# Run CLI
 python ollama-cli.py
-
-# Single query
-python ollama-cli.py -q "What is Python?"
-
-# Use specific model
-python ollama-cli.py -m codellama
-
-# List available models
-python ollama-cli.py --list-models
 ```
 
-<<<<<<< HEAD
-### First Time Setup
+### 3. Setup Web UI
+```bash
+# Install Node.js dependencies
+npm install
 
-1. Start Ollama: `ollama serve`
-2. Pull a model: `ollama pull llama2`
-3. Run the CLI: `python ollama-cli.py`
-4. Enable MCP servers: Type `/mcp` in the chat
+# Create environment variables (if needed)
+# Create .env.local file with:
+# NEXT_PUBLIC_API_URL=http://localhost:11434
 
-## 📖 Commands
+# Run development server
+npm run dev
+```
 
-### Chat Commands
+## 🎯 Usage
+
+### CLI Commands
 
 | Command | Description |
 |---------|-------------|
 | `/help` | Show available commands |
-| `/clear` | Clear conversation history |
-| `/models` | List available Ollama models |
-| `/switch` | Switch to a different model |
-| `/info` | Show system information |
-| `/read <file>` | Read and discuss a file |
-| `/exec <cmd>` | Execute shell command |
-| `/save` | Save conversation history |
-| `/config` | Show current configuration |
-| `/system` | Set custom system prompt |
+| `/models` | List available models |
+| `/switch` | Switch models |
 | `/mcp` | Manage MCP servers |
-| `/tools` | List available MCP tools |
-| `/exit` | Exit the assistant |
+| `/read <file>` | Read and discuss files |
+| `/exec <cmd>` | Execute shell commands |
+| `/exit` | Exit CLI |
 
-### Command Line Arguments
+### Web UI Routes
 
-```bash
-python ollama-cli.py [OPTIONS]
+- `/` - Home page with features
+- `/app` - Main chat interface
+- `/pricing` - Pricing information
+- `/contact` - Contact form
 
-Options:
-  -m, --model MODEL        Specify Ollama model (default: llama2)
-  -q, --query QUERY        Single query mode
-  --url URL                Ollama API URL (default: http://localhost:11434)
-  --list-models            List available models
-  --reset-config           Reset configuration to defaults
-  --no-mcp                 Disable MCP integration
-  -h, --help               Show help message
-```
+## 🔌 MCP Integration
 
-## 🔧 MCP Configuration
+Both CLI and Web UI support MCP servers:
 
-### Enable MCP Servers
+### Available MCP Servers:
+- **Filesystem** - File read/write operations
+- **GitHub** - Repository access
+- **Brave Search** - Web search
+- **PostgreSQL** - Database queries
 
-1. In the chat, type `/mcp`
-2. Choose option `e` to enable a server
-3. Enter the server name (e.g., `filesystem`)
-4. Choose option `r` to reconnect
-
-### Configure Server Settings
+### Configuration:
 
 Edit `~/.ollama-cli/mcp_servers.json` (or `%USERPROFILE%\.ollama-cli\mcp_servers.json` on Windows):
 
-=======
-**First Time Setup**
-- Start Ollama: `ollama serve`
-- Pull a model: `ollama pull llama2`
-- Run the CLI: `python ollama-cli.py`
-- Enable MCP servers: Type `/mcp` in the chat
-
-📖 **Commands**
-
-**Chat Commands**
-
-| Command                 | Description                               |
-|-------------------------|-------------------------------------------|
-| `/help`                 | Show available commands                   |
-| `/clear`                | Clear conversation history                |
-| `/models`               | List available Ollama models              |
-| `/switch`               | Switch to a different model               |
-| `/info`                 | Show system information                   |
-| `/read <file>`          | Read and discuss a file                   |
-| `/exec <cmd>`           | Execute shell command                     |
-| `/save`                 | Save conversation history                 |
-| `/config`               | Show current configuration                |
-| `/system`               | Set custom system prompt                  |
-| `/mcp`                  | Manage MCP servers                        |
-| `/tools`                | List available MCP tools                  |
-| `/exit`                 | Exit the assistant                        |
-
-**Command Line Arguments**
-```bash
-python ollama-cli.py [OPTIONS]
-```
-**Options:**
-- `-m, --model MODEL`        Specify Ollama model (default: llama2)
-- `-q, --query QUERY`        Single query mode
-- `--url URL`                Ollama API URL (default: http://localhost:11434)
-- `--list-models`            List available models
-- `--reset-config`           Reset configuration to defaults
-- `--no-mcp`                 Disable MCP integration
-- `-h, --help`               Show help message
-
-🔧 **MCP Configuration**
-
-**Enable MCP Servers**
-- In the chat, type `/mcp`
-- Choose option `e` to enable a server
-- Enter the server name (e.g., filesystem)
-- Choose option `r` to reconnect
-
-**Configure Server Settings**  
-Edit `~/.ollama-cli/mcp_servers.json`:
->>>>>>> 21b9f07b8f138c2534cb3526fb9816de9d3d4229
 ```json
 {
   "filesystem": {
@@ -251,166 +162,96 @@ Edit `~/.ollama-cli/mcp_servers.json`:
     "command": "npx",
     "args": ["-y", "@modelcontextprotocol/server-github"],
     "env": {
-      "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_your_token_here"
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "your_token_here"
     },
     "enabled": true
   }
 }
 ```
 
-<<<<<<< HEAD
-### Available MCP Servers
+## 📁 Project Components
 
-=======
-**Available MCP Servers**
->>>>>>> 21b9f07b8f138c2534cb3526fb9816de9d3d4229
-- **Filesystem** - File read/write, directory listing
-- **GitHub** - Repository access, issues, pull requests
-- **Brave Search** - Web search integration
-- **PostgreSQL** - Database queries and operations
+### Python CLI Components:
+- `ollama-cli.py` - Main CLI application
+- `Config` class - Configuration management
+- `MCPManager` class - MCP server handling
+- `OllamaAssistant` class - Chat interface
 
-<<<<<<< HEAD
-## 💡 Use Cases
+### Next.js Web Components:
+- `page.tsx` - Contact page
+- `chat-interface.tsx` - Chat UI component
+- `chat-messages.tsx` - Message display
+- `chat-input.tsx` - Input component
+- `settings-panel.tsx` - Settings UI
+- `mcp-panel.tsx` - MCP management UI
+- `hero-section.tsx` - Landing page hero
+- `features-section.tsx` - Features showcase
 
-### Code Review
-```
-You: Read src/main.py and suggest improvements
-```
+## 🎨 Tech Stack
 
-### System Debugging
-```
-You: /exec docker ps
-You: What does this output mean?
-```
+### CLI:
+- Python 3.8+
+- requests
+- mcp
+- asyncio
 
-### Research
-```
-You: Search for latest developments in AI safety
-```
-
-### Database Operations
-```
-You: Query the users table where created_at > '2024-01-01'
-```
-
-## 📁 Project Structure
-
-=======
-💡 **Use Cases**
-- **Code Review**  
-  You: Read src/main.py and suggest improvements
-- **System Debugging**  
-  You: /exec docker ps  
-  You: What does this output mean?
-- **Research**  
-  You: Search for latest developments in AI safety
-- **Database Operations**  
-  You: Query the users table where created_at > '2024-01-01'
-
-📁 **Project Structure**
->>>>>>> 21b9f07b8f138c2534cb3526fb9816de9d3d4229
-```
-ollama-cli-assistant/
-├── ollama-cli.py          # Main application
-├── requirements.txt       # Python dependencies
-<<<<<<< HEAD
-├── README.md             # This file
-├── LICENSE               # MIT License
-└── .gitignore            # Git ignore rules
-```
+### Web UI:
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Radix UI components
+- Lucide icons
 
 ## 🔐 Security
 
-- MCP tools run with your system permissions
-- API keys are stored locally in `~/.ollama-cli/mcp_servers.json`
-- Shell commands require confirmation before execution
-- File access is limited to configured directories
-
-**Important:** Keep your configuration files secure and never commit API keys to version control.
+- MCP tools run with system permissions
+- API keys stored locally
+- Shell commands require confirmation
+- File access limited to configured directories
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
+Contributions welcome! Please:
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create a feature branch
+3. Commit your changes
+4. Push to your fork
 5. Open a Pull Request
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file
+
+Copyright (c) 2024 Larry Buckalew
 
 ## 🙏 Acknowledgments
 
 - [Ollama](https://ollama.ai) - Local LLM runtime
-- [Model Context Protocol](https://modelcontextprotocol.io) - Tool integration framework
-- [Anthropic](https://anthropic.com) - For MCP specification
+- [Model Context Protocol](https://modelcontextprotocol.io) - Tool integration
+- [Next.js](https://nextjs.org) - React framework
+- [Radix UI](https://radix-ui.com) - UI components
 
 ## 📮 Support
 
-- **Issues:** [GitHub Issues](https://github.com/larrybuckalew/ollama-cli-assistant/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/larrybuckalew/ollama-cli-assistant/discussions)
+- **Issues**: [GitHub Issues](https://github.com/larrybuckalew/ollama-cli-assistant/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/larrybuckalew/ollama-cli-assistant/discussions)
+- **Email**: Contact via GitHub
 
 ## 🗺️ Roadmap
 
-- [ ] Plugin system for custom commands
-- [ ] Multi-language support
+- [ ] Real-time collaboration
 - [ ] Voice input/output
-- [ ] Web interface
-- [ ] Docker container
-- [ ] More MCP server integrations
+- [ ] Mobile app
+- [ ] Docker containers
+- [ ] More MCP integrations
+- [ ] Plugin system
+- [ ] Multi-language support
 
 ---
 
-**Author:** Larry Buckalew
+**Author**: Larry Buckalew
 
 Made with ❤️ for the AI community
-=======
-├── README.md              # This file
-├── LICENSE                # MIT License
-└── .gitignore             # Git ignore rules
-```
 
-🔐 **Security**
-- MCP tools run with your system permissions.
-- API keys are stored locally in `~/.ollama-cli/mcp_servers.json`.
-- Shell commands require confirmation before execution.
-- File access is limited to configured directories.
-
-> **Important:** Keep your configuration files secure and never commit API keys to version control.
-
-🤝 **Contributing**
-Contributions are welcome! Please feel free to submit a Pull Request.
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/AmazingFeature`
-3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
-4. Push to the branch: `git push origin feature/AmazingFeature`
-5. Open a Pull Request
-
-📝 **License**
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-🙏 **Acknowledgments**
-- Ollama - Local LLM runtime
-- Model Context Protocol - Tool integration framework
-- Anthropic - For MCP specification
-
-📮 **Support**
-- Issues: GitHub Issues
-- Discussions: GitHub Discussions
-
-🗺️ **Roadmap**
-- Plugin system for custom commands
-- Multi-language support
-- Voice input/output
-- Web interface
-- Docker container
-- More MCP server integrations
-
----
-
-Author: Larry Buckalew  
-Made with ❤️ for the AI community
->>>>>>> 21b9f07b8f138c2534cb3526fb9816de9d3d4229
+**Choose your interface**: Command-line power or web convenience - both backed by the same powerful Ollama engine!
