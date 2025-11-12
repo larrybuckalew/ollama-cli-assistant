@@ -21,8 +21,8 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OLLAMA_API_KEY || 'REMOVED'}`,
-        'X-Device-Key': process.env.OLLAMA_DEVICE_KEY || 'REMOVED',
+        'Authorization': process.env.OLLAMA_API_KEY ? `Bearer ${process.env.OLLAMA_API_KEY}` : undefined,
+        'X-Device-Key': process.env.OLLAMA_DEVICE_KEY,
       },
       body: JSON.stringify(ollamaRequest)
     })
