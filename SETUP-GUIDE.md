@@ -40,6 +40,64 @@ npm run dev
 
 **Note**: You may see errors about missing directories. This is OK for now - the app will still work.
 
+### 3. Backend Setup and Environment Variables ⚠️
+
+To enable user registration and social logins (Google, Microsoft, GitHub), you need to run the Python backend server and set up environment variables for your API keys.
+
+#### 3.1 Install Backend Dependencies
+
+```cmd
+cd backend
+pip install -r requirements.txt
+cd ..
+```
+
+#### 3.2 Set Environment Variables
+
+You **MUST** set the following environment variables in your terminal **before** running the backend server. These are sensitive credentials and should **never** be hardcoded directly into your code or committed to version control.
+
+**For Windows (Command Prompt/PowerShell):**
+
+```powershell
+# For Google OAuth (replace with your actual credentials)
+$env:GOOGLE_CLIENT_ID="your-google-client-id"
+$env:GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# For Microsoft OAuth (replace with your actual credentials)
+$env:MICROSOFT_CLIENT_ID="your-microsoft-client-id"
+$env:MICROSOFT_CLIENT_SECRET="your-microsoft-client-secret"
+
+# For GitHub OAuth (replace with your actual credentials)
+$env:GITHUB_CLIENT_ID="your-github-client-id"
+$env:GITHUB_CLIENT_SECRET="your-github-client-secret"
+
+# For JWT Token Security (change this to any long, random string)
+$env:SECRET_KEY="a-very-secret-key-that-you-should-change"
+```
+
+**Important:** These variables are only set for the current terminal session. If you close the terminal, you will need to set them again. For persistent environment variables, you would typically set them at the system level or use a `.env` file with a tool like `python-dotenv` (which is not currently set up).
+
+#### 3.3 Run the Backend Server
+
+After setting the environment variables, navigate to the `backend` directory and start the server:
+
+```cmd
+cd backend
+uvicorn main:app --reload
+```
+
+**Expected**: The FastAPI server should start, typically on `http://127.0.0.1:8000`. You should see output indicating the server is running.
+
+#### 3.4 Configure OAuth Redirect URIs
+
+For each social login provider you enable, you **MUST** configure the following Redirect URIs in their respective developer consoles:
+
+*   **Google:** `http://127.0.0.1:8000/auth/callback/google`
+*   **Microsoft:** `http://127.0.0.1:8000/auth/callback/microsoft`
+*   **GitHub:** `http://127.0.0.1:8000/auth/callback/github`
+
+---
+
 ## 🔧 Files Review
 
 ### ✅ Ready to Push:
