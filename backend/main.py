@@ -122,11 +122,49 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 # ... (existing code) ...
 
+import stripe
+
+# --- Configuration ---
+# ... (existing config)
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "your-stripe-secret-key")
+stripe.api_key = STRIPE_SECRET_KEY
+# ... (rest of the config)
+
+# ... (existing code) ...
+
+# --- Pydantic Schemas ---
+class CheckoutSessionRequest(BaseModel):
+    priceId: str
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+# ... (rest of schemas)
+
 # --- API Endpoints ---
+
+@app.post("/api/create-checkout-session")
+async def create_checkout_session(request: CheckoutSessionRequest):
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    'price': request.priceId,
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url='http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url='http://localhost:3000/cancel',
+        )
+        return {"url": checkout_session.url}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/")
 def read_root():
     return {"message": "Ollama CLI Backend is running"}
+# ... (rest of endpoints)
 
 @app.post("/api/users/token")
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):

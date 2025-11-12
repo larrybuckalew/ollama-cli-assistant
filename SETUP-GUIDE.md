@@ -73,6 +73,9 @@ $env:GITHUB_CLIENT_SECRET="your-github-client-secret"
 
 # For JWT Token Security (change this to any long, random string)
 $env:SECRET_KEY="a-very-secret-key-that-you-should-change"
+
+# For Stripe Payments (replace with your actual Stripe Secret Key)
+$env:STRIPE_SECRET_KEY="your-stripe-secret-key"
 ```
 
 **Important:** These variables are only set for the current terminal session. If you close the terminal, you will need to set them again. For persistent environment variables, you would typically set them at the system level or use a `.env` file with a tool like `python-dotenv` (which is not currently set up).

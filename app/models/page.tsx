@@ -1,6 +1,6 @@
 "use client"
 
-import { Database, Download, Star, TrendingUp, Check, Filter, Search } from "lucide-react"
+import { Database, Download, Star, TrendingUp, Check, Filter, Search, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,6 +19,7 @@ export default function ModelsPage() {
     { name: "Creative", count: 7 },
   ]
 
+  // IMPORTANT: Replace these placeholder price IDs with your actual Price IDs from your Stripe dashboard.
   const models = [
     {
       name: "Code Assistant Pro",
@@ -28,6 +29,7 @@ export default function ModelsPage() {
       downloads: 12500,
       rating: 4.9,
       price: 49,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O431", // Placeholder
       popular: true,
       features: ["Code completion", "Bug detection", "Documentation", "Multi-language"],
     },
@@ -39,6 +41,7 @@ export default function ModelsPage() {
       downloads: 8900,
       rating: 4.8,
       price: 79,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O432", // Placeholder
       new: true,
       features: ["Image analysis", "OCR", "Scene understanding", "Visual reasoning"],
     },
@@ -50,6 +53,7 @@ export default function ModelsPage() {
       downloads: 4200,
       rating: 4.9,
       price: 149,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O433", // Placeholder
       features: ["Contract analysis", "Legal research", "Compliance", "Case summarization"],
     },
     {
@@ -60,6 +64,7 @@ export default function ModelsPage() {
       downloads: 5800,
       rating: 4.7,
       price: 199,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O434", // Placeholder
       features: ["Medical terminology", "Research analysis", "Drug interactions", "Clinical notes"],
     },
     {
@@ -70,6 +75,7 @@ export default function ModelsPage() {
       downloads: 6700,
       rating: 4.8,
       price: 89,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O435", // Placeholder
       features: ["Financial modeling", "Market analysis", "Risk assessment", "Report generation"],
     },
     {
@@ -80,6 +86,7 @@ export default function ModelsPage() {
       downloads: 9200,
       rating: 4.6,
       price: 59,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O436", // Placeholder
       features: ["Story writing", "Marketing copy", "Dialogue", "Character development"],
     },
     {
@@ -90,6 +97,7 @@ export default function ModelsPage() {
       downloads: 7100,
       rating: 4.8,
       price: 69,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O437", // Placeholder
       popular: true,
       features: ["Data analysis", "Statistical methods", "Visualization", "ML workflows"],
     },
@@ -101,28 +109,39 @@ export default function ModelsPage() {
       downloads: 11300,
       rating: 4.9,
       price: 99,
+      priceId: "price_1PCOTMDEQaroqDjsV4a8O438", // Placeholder
       popular: true,
       features: ["50+ languages", "Cultural context", "Idiomatic expressions", "Technical translation"],
     },
   ]
 
-  const handleDownload = (model: (typeof models)[0]) => {
-    const modelJson = JSON.stringify(model, null, 2)
-    const blob = new Blob([modelJson], { type: "application/json" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${model.name.toLowerCase().replace(/\s+/g, "-")}.json`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }
+  const handleCheckout = async (priceId: string) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ priceId }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create checkout session");
+      }
+
+      const { url } = await response.json();
+      if (url) {
+        window.location.href = url;
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      // You could show an error message to the user here
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
       {/* Hero Section */}
       <section className="border-b border-border py-16">
         <div className="container mx-auto px-4">
@@ -178,11 +197,11 @@ export default function ModelsPage() {
                     </label>
                     <label className="flex items-center gap-2 text-sm">
                       <input type="checkbox" className="rounded" />
-                      <span>$50 - $100</span>
+                      <span>$50 - 00</span>
                     </label>
                     <label className="flex items-center gap-2 text-sm">
                       <input type="checkbox" className="rounded" />
-                      <span>Over $100</span>
+                      <span>Over 00</span>
                     </label>
                   </div>
                 </div>
@@ -274,9 +293,9 @@ export default function ModelsPage() {
                         <div className="text-2xl font-bold">${model.price}</div>
                         <div className="text-xs text-muted-foreground">one-time purchase</div>
                       </div>
-                      <Button onClick={() => handleDownload(model)}>
-                        <Download className="mr-2 h-4 w-4" />
-                        Download
+                      <Button onClick={() => handleCheckout(model.priceId)}>
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Purchase
                       </Button>
                     </div>
                   </Card>
