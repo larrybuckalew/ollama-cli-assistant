@@ -15,11 +15,8 @@ export function ChatInterface() {
   const [showSettings, setShowSettings] = useState(false)
   const [selectedModel, setSelectedModel] = useState("llama3.2")
 
-  const { messages, sendMessage, status } = useChat<UIMessage>({
+  const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({ api: "/api/chat" }),
-    body: {
-      model: selectedModel,
-    },
   })
 
   return (
@@ -38,10 +35,10 @@ export function ChatInterface() {
             <ChatMessages messages={messages} status={status} />
           </div>
 
-          <div className="border-t border-border bg-card p-4">
-            <TokenStats messages={messages} />
-            <ChatInput onSend={sendMessage} isLoading={status === "in_progress"} />
-          </div>
+           <div className="border-t border-border bg-card p-4">
+             <TokenStats messages={messages} />
+             <ChatInput onSend={(message) => sendMessage({ text: message }, { body: { model: selectedModel } })} isLoading={status === "streaming"} />
+           </div>
         </div>
 
         {/* Side Panels */}

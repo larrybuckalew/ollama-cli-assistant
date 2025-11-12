@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Send, Paperclip } from "lucide-react"
 
 interface ChatInputProps {
-  onSend: (message: { text: string }) => void
+  onSend: (message: string) => void
   isLoading: boolean
 }
 
@@ -20,7 +20,7 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
     e.preventDefault()
     if (!input.trim() || isLoading) return
 
-    onSend({ text: input })
+    onSend(input)
     setInput("")
 
     // Reset textarea height
