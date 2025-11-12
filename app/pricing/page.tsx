@@ -134,7 +134,7 @@ export default function PricingPage() {
                 </ul>
 
                 <Button asChild variant={plan.popular ? "default" : "outline"} size="lg" className="w-full">
-                  <Link href={plan.name === "Enterprise" ? "/contact" : "/"}>{plan.cta}</Link>
+                  <Link href={plan.name === "Enterprise" ? "/contact" : "/register"}>{plan.cta}</Link>
                 </Button>
               </Card>
             ))}

@@ -1,3 +1,5 @@
+"use client"
+
 import { Database, Download, Star, TrendingUp, Check, Filter, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -102,6 +104,19 @@ export default function ModelsPage() {
       features: ["50+ languages", "Cultural context", "Idiomatic expressions", "Technical translation"],
     },
   ]
+
+  const handleDownload = (model: (typeof models)[0]) => {
+    const modelJson = JSON.stringify(model, null, 2)
+    const blob = new Blob([modelJson], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `${model.name.toLowerCase().replace(/\s+/g, "-")}.json`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -281,7 +296,7 @@ export default function ModelsPage() {
                         <div className="text-2xl font-bold">${model.price}</div>
                         <div className="text-xs text-muted-foreground">one-time purchase</div>
                       </div>
-                      <Button>
+                      <Button onClick={() => handleDownload(model)}>
                         <Download className="mr-2 h-4 w-4" />
                         Download
                       </Button>

@@ -44,9 +44,11 @@ export default function Home() {
                 models from our curated marketplace or connect to your own endpoints.
               </p>
               <div className="flex flex-col items-start gap-4 sm:flex-row">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Get Started Free
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button size="lg" className="w-full sm:w-auto" asChild>
+                  <Link href="/register">
+                    Get Started Free
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent" asChild>
                   <Link href="/models">Browse Models</Link>
@@ -392,7 +394,9 @@ export default function Home() {
             <h2 className="mb-4 text-3xl font-bold">Ready to get started?</h2>
             <p className="mb-8 text-lg text-muted-foreground">Join thousands of developers running AI models locally</p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg">Start Free Trial</Button>
+              <Button size="lg" asChild>
+                <Link href="/register">Start Free Trial</Link>
+              </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link href="/pricing">View Pricing</Link>
               </Button>
