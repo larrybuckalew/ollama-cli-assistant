@@ -1,7 +1,4 @@
-import { Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import Link from "next/link"
+import Header from "@/components/header"
 
 export default function PricingPage() {
   const plans = [
@@ -61,29 +58,7 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-primary" />
-            <span className="text-xl font-semibold">Ollama CLI</span>
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-              Home
-            </Link>
-            <Link href="/models" className="text-sm text-muted-foreground hover:text-foreground">
-              Models
-            </Link>
-            <Link href="/pricing" className="text-sm font-medium text-foreground">
-              Pricing
-            </Link>
-            <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="border-b border-border py-20">
