@@ -1,9 +1,13 @@
 import Header from "@/components/header"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import Link from "next/link"
+import { ArrowRight, Terminal, Zap, Shield, GitBranch, Network, Database, Check, Download } from "lucide-react"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      
 
       {/* Hero Section */}
       <section className="border-b border-border py-20 lg:py-32">

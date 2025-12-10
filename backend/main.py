@@ -136,10 +136,7 @@ stripe.api_key = STRIPE_SECRET_KEY
 class CheckoutSessionRequest(BaseModel):
     priceId: str
 
-class UserCreate(BaseModel):
-    email: EmailStr
-    password: str
-# ... (rest of schemas)
+# (duplicate removed)
 
 # --- API Endpoints ---
 

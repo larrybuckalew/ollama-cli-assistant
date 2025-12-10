@@ -5,6 +5,10 @@ export const maxDuration = 30
 export async function POST(req: Request) {
   const { messages, model = "llama3.2" }: { messages: UIMessage[]; model?: string } = await req.json()
 
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return new Response("Error: 'messages' is missing or empty in the request body.", { status: 400 });
+  }
+
   try {
     // Get Ollama API URL from environment or use default
     const ollamaUrl = process.env.OLLAMA_API_URL || "http://localhost:11434"
