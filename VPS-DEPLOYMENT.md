@@ -12,14 +12,27 @@ Your VPS should have:
 - ✅ SSH access
 - ✅ Domain: `buckalewfinancial.com` or `larrybuckalew.com`
 
-## 🌐 Domain Setup Options
+## 🌐 Domain Setup Options (Cloudflare)
 
-Since you already use `n8n.buckalewfinancial.com` for n8n, here are recommended subdomain options for Ollama:
+Since you use **Cloudflare** for `buckalewfinancial.com` and already have `n8n.buckalewfinancial.com`, here are the recommended subdomain options:
 
 ### Recommended Options:
 - **`ai.buckalewfinancial.com`** - Clean, professional, indicates AI services
 - **`ollama.buckalewfinancial.com`** - Specific, clear what it is
 - **`app.buckalewfinancial.com`** - Generic, could host multiple apps
+
+### Cloudflare DNS Setup:
+1. **Login to Cloudflare Dashboard**
+2. **Select** `buckalewfinancial.com`
+3. **Go to** DNS → Records
+4. **Add CNAME Record**:
+   ```
+   Type: CNAME
+   Name: ai
+   Target: buckalewfinancial.com
+   Proxy status: Proxied (orange cloud)
+   TTL: Auto
+   ```
 
 ### Alternative Options:
 - Use `larrybuckalew.com` for the main Ollama instance
@@ -27,6 +40,12 @@ Since you already use `n8n.buckalewfinancial.com` for n8n, here are recommended 
 - Add `/ollama` path to existing n8n subdomain (not recommended)
 
 **Recommendation**: `ai.buckalewfinancial.com` - it's professional and clearly indicates AI services alongside your n8n automation platform.
+
+### Cloudflare Benefits:
+- ✅ **Free SSL** (Universal SSL)
+- ✅ **DDoS Protection**
+- ✅ **Caching** for better performance
+- ✅ **Analytics** and monitoring
 
 ## 🚀 Quick VPS Setup
 
@@ -204,19 +223,30 @@ sudo systemctl status ollama-backend
 sudo systemctl status ollama-web
 ```
 
-### 7. Setup SSL (Let's Encrypt)
+### 7. Setup SSL (Cloudflare Universal SSL)
+
+**Since you're using Cloudflare, you get FREE SSL automatically!** 🎉
+
+- ✅ **Universal SSL** is enabled by default on all Cloudflare plans
+- ✅ **No additional SSL setup required**
+- ✅ **Automatic certificate renewal**
+- ✅ **HTTP/2 and modern encryption**
+
+**Just ensure your DNS record is "Proxied" (orange cloud) in Cloudflare.**
+
+### Optional: Origin Server SSL (Advanced)
+
+If you want end-to-end encryption to your VPS (not required with Cloudflare):
 
 ```bash
 # Get SSL certificate for your chosen subdomain
 sudo certbot --nginx -d ai.buckalewfinancial.com
 
-# Or if using a different subdomain:
-# sudo certbot --nginx -d ollama.buckalewfinancial.com
-# sudo certbot --nginx -d app.buckalewfinancial.com
-
 # Test renewal
 sudo certbot renew --dry-run
 ```
+
+**Recommendation**: Skip this step - Cloudflare's Universal SSL is sufficient and easier to manage.
 
 ## 🔍 Testing Your Deployment
 
@@ -340,9 +370,10 @@ pm2 startup
 - [ ] Installed fail2ban
 - [ ] Set up firewall (ufw)
 - [ ] Regular security updates
-- [ ] SSL certificates installed
+- [x] **SSL certificates** (Cloudflare Universal SSL - FREE!)
 - [ ] Environment variables secured
 - [ ] File permissions correct
+- [ ] **Cloudflare protection** (DDoS, WAF, bot management)
 
 ## 🎯 Your VPS URLs
 
