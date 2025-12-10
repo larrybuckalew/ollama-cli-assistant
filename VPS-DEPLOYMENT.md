@@ -10,6 +10,23 @@ Your VPS should have:
 - ✅ 10GB free disk space
 - ✅ n8n already running
 - ✅ SSH access
+- ✅ Domain: `buckalewfinancial.com` or `larrybuckalew.com`
+
+## 🌐 Domain Setup Options
+
+Since you already use `n8n.buckalewfinancial.com` for n8n, here are recommended subdomain options for Ollama:
+
+### Recommended Options:
+- **`ai.buckalewfinancial.com`** - Clean, professional, indicates AI services
+- **`ollama.buckalewfinancial.com`** - Specific, clear what it is
+- **`app.buckalewfinancial.com`** - Generic, could host multiple apps
+
+### Alternative Options:
+- Use `larrybuckalew.com` for the main Ollama instance
+- Different ports on same subdomain (less clean)
+- Add `/ollama` path to existing n8n subdomain (not recommended)
+
+**Recommendation**: `ai.buckalewfinancial.com` - it's professional and clearly indicates AI services alongside your n8n automation platform.
 
 ## 🚀 Quick VPS Setup
 
@@ -126,13 +143,13 @@ EOF
 
 ### 5. Configure Nginx Reverse Proxy
 
-Create nginx config (`/etc/nginx/sites-available/ollama-cli-assistant`):
+Create nginx config (`/etc/nginx/sites-available/ai.buckalewfinancial.com`):
 
 ```bash
-sudo tee /etc/nginx/sites-available/ollama-cli-assistant > /dev/null <<EOF
+sudo tee /etc/nginx/sites-available/ai.buckalewfinancial.com > /dev/null <<EOF
 server {
     listen 80;
-    server_name your-domain.com www.your-domain.com;
+    server_name ai.buckalewfinancial.com;
 
     # Backend API
     location /api/ {
@@ -190,8 +207,12 @@ sudo systemctl status ollama-web
 ### 7. Setup SSL (Let's Encrypt)
 
 ```bash
-# Get SSL certificate
-sudo certbot --nginx -d your-domain.com -d www.your-domain.com
+# Get SSL certificate for your chosen subdomain
+sudo certbot --nginx -d ai.buckalewfinancial.com
+
+# Or if using a different subdomain:
+# sudo certbot --nginx -d ollama.buckalewfinancial.com
+# sudo certbot --nginx -d app.buckalewfinancial.com
 
 # Test renewal
 sudo certbot renew --dry-run
@@ -325,10 +346,12 @@ pm2 startup
 
 ## 🎯 Your VPS URLs
 
-After setup, your application will be available at:
-- **Web UI**: `https://your-domain.com`
-- **API**: `https://your-domain.com/api/`
-- **n8n**: `https://your-domain.com/n8n/` (existing)
+After setup, your applications will be available at:
+- **Ollama Web UI**: `https://ai.buckalewfinancial.com`
+- **Ollama API**: `https://ai.buckalewfinancial.com/api/`
+- **n8n**: `https://n8n.buckalewfinancial.com` (existing)
+
+**Clean, professional setup with dedicated subdomains for each service!**
 
 ## 💡 Integration with n8n
 
