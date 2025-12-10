@@ -116,6 +116,23 @@ npm install
 npm run dev
 ```
 
+## 🚀 Deployment
+
+The Ollama CLI Assistant can be deployed to production using modern cloud platforms. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
+
+### Quick Deploy Options:
+
+| Component | Platform | Status | Cost |
+|-----------|----------|--------|------|
+| **Web UI** | [Vercel](https://vercel.com) | ✅ Ready | Free |
+| **Backend** | [Railway](https://railway.app) | ✅ Ready | $5/month |
+| **Backend** | [Render](https://render.com) | ✅ Ready | $7/month |
+| **CLI** | GitHub Releases | ✅ Ready | Free |
+
+### One-Click Deploy:
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/larrybuckalew/ollama-cli-assistant)
+
 ## 🎯 Usage
 
 ### CLI Commands
