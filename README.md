@@ -272,3 +272,4 @@ Copyright (c) 2024 Larry Buckalew
 Made with ❤️ for the AI community
 
 **Choose your interface**: Command-line power or web convenience - both backed by the same powerful Ollama engine!
+"Auto-deployment test" 
