@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
@@ -9,7 +8,6 @@ import { CheckCircle } from "lucide-react"
 export default function SuccessPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <main className="container mx-auto px-4 py-20 flex items-center justify-center">
         <Card className="max-w-lg w-full p-8 text-center">
           <CheckCircle className="h-16 w-16 text-terminal-green mx-auto mb-6" />

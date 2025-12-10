@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import Header from "@/components/header"
 import { Card } from "@/components/ui/card"
 import { User, Settings, Box } from "lucide-react"
 
@@ -29,7 +28,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight">Welcome to your Dashboard</h1>
