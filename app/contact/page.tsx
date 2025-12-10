@@ -9,26 +9,6 @@ import Link from "next/link"
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md bg-primary" />
-            <span className="text-xl font-semibold">Ollama CLI</span>
-          </Link>
-          <nav className="flex items-center gap-6">
-            <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
-              Home
-            </Link>
-            <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
-              Pricing
-            </Link>
-            <Link href="/contact" className="text-sm font-medium text-foreground">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
 
       {/* Hero Section */}
       <section className="border-b border-border py-20">

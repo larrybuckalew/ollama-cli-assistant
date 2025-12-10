@@ -284,3 +284,81 @@ async def auth_callback_github(request: Request, db: Session = Depends(get_db)):
     access_token = create_access_token(data={"sub": db_user.email})
     response = RedirectResponse(url=f"/auth/callback?token={access_token}")
     return response
+
+# --- Chat endpoint for Ollama ---
+import httpx
+
+class ChatRequest(BaseModel):
+    message: str
+    model: str = "qwen2:0.5b"
+
+@app.post("/api/chat")
+async def chat(request: ChatRequest):
+    """Chat endpoint that forwards requests to local Ollama instance"""
+    try:
+        ollama_url = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+        
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            response = await client.post(
+                f"{ollama_url}/api/generate",
+                json={
+                    "model": request.model,
+                    "prompt": request.message,
+                    "stream": False
+                }
+            )
+            response.raise_for_status()
+            data = response.json()
+            return {"response": data.get("response", "")}
+            
+    except httpx.HTTPError as e:
+        raise HTTPException(status_code=500, detail=f"Ollama API error: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+# --- Ollama Model Management Endpoints ---
+
+@app.get("/api/ollama/models")
+async def list_installed_models():
+    """List all installed Ollama models"""
+    try:
+        ollama_url = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(f"{ollama_url}/api/tags")
+            response.raise_for_status()
+            return response.json()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error listing models: {str(e)}")
+
+class PullModelRequest(BaseModel):
+    name: str
+
+@app.post("/api/ollama/pull")
+async def pull_model(request: PullModelRequest):
+    """Pull/download an Ollama model"""
+    try:
+        ollama_url = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+        async with httpx.AsyncClient(timeout=600.0) as client:
+            response = await client.post(
+                f"{ollama_url}/api/pull",
+                json={"name": request.name, "stream": False}
+            )
+            response.raise_for_status()
+            return {"status": "success", "message": f"Model {request.name} pulled successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error pulling model: {str(e)}")
+
+@app.delete("/api/ollama/models/{model_name}")
+async def delete_model(model_name: str):
+    """Delete an Ollama model"""
+    try:
+        ollama_url = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.delete(
+                f"{ollama_url}/api/delete",
+                json={"name": model_name}
+            )
+            response.raise_for_status()
+            return {"status": "success", "message": f"Model {model_name} deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deleting model: {str(e)}")

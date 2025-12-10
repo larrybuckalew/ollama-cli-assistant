@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
-import { ArrowRight, Terminal, Zap, Shield, GitBranch, Network, Database, Check, Download } from "lucide-react"
+import { ArrowRight, Terminal, Zap, Shield, GitBranch, Network, Database, Check, Download, DownloadCloud } from "lucide-react"
 
 export default function Home() {
   return (
@@ -29,6 +29,12 @@ export default function Home() {
                 </Button>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent" asChild>
                   <Link href="/models">Browse Models</Link>
+                </Button>
+                <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent" asChild>
+                  <a href="/downloads/ollama-cli.py" download>
+                    <DownloadCloud className="mr-2 h-4 w-4" />
+                    Download CLI
+                  </a>
                 </Button>
               </div>
             </div>
