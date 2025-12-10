@@ -6,7 +6,6 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import Header from "@/components/header"
 
 export default function ModelsPage() {
   const categories = [
@@ -141,7 +140,6 @@ export default function ModelsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       {/* Hero Section */}
       <section className="border-b border-border py-16">
         <div className="container mx-auto px-4">

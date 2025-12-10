@@ -1,4 +1,3 @@
-import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -69,7 +68,6 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
 
       {/* Hero Section */}
       <section className="border-b border-border py-20">

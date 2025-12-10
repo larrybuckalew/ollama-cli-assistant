@@ -20,14 +20,23 @@ export async function POST(req: Request) {
       stream: true
     }
 
+    // Build headers dynamically
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    }
+    
+    if (process.env.OLLAMA_API_KEY) {
+      headers['Authorization'] = `Bearer ${process.env.OLLAMA_API_KEY}`
+    }
+    
+    if (process.env.OLLAMA_DEVICE_KEY) {
+      headers['X-Device-Key'] = process.env.OLLAMA_DEVICE_KEY
+    }
+
     // Call Ollama API
     const response = await fetch(`${ollamaUrl}/api/generate`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': process.env.OLLAMA_API_KEY ? `Bearer ${process.env.OLLAMA_API_KEY}` : undefined,
-        'X-Device-Key': process.env.OLLAMA_DEVICE_KEY,
-      },
+      headers: headers,
       body: JSON.stringify(ollamaRequest)
     })
 

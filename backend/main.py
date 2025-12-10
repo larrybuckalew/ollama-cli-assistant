@@ -9,8 +9,8 @@ from authlib.integrations.starlette_client import OAuth
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 
-from . import database
-from .database import SessionLocal, engine, User
+import database
+from database import SessionLocal, engine, User
 
 # --- Configuration ---
 # IMPORTANT: For production, you should use environment variables for these secrets.
